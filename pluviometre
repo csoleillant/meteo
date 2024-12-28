@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Données ESP32 via Adafruit IO</title>
+  <script>
+    async function fetchData() {
+      const apiKey = "aio_kwcH55vlg8F55CamMK9zJsih8fOf";
+      const username = "Chantal";
+      const feedKey = "esp32-data";
+
+      const url = `https://io.adafruit.com/api/v2/${username}/feeds/${feedKey}/data/last`;
+      const response = await fetch(url, {
+        headers: {
+          "X-AIO-Key": apiKey
+        }
+      });
+      const data = await response.json();
+      document.getElementById("data").innerText = `Dernière donnée : ${data.value}`;
+    }
+
+    window.onload = fetchData;
+  </script>
+</head>
+<body>
+  <h1>Données ESP32 via Adafruit IO</h1>
+  <p id="data">Chargement...</p>
+</body>
+</html>
